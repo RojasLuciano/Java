@@ -1,0 +1,70 @@
+
+Por cada articulo enviado, liste el nombre del proveedor junto al id del articulo 
+
+SELECT p.nombre,e.id_articulo
+FROM Proveedor p JOIN Envio e ON p.id_proveedor = e.id_proveedor
+
+retorne el número total de cada artículo enviado por cada proveedor junto con el nombre del
+proveedor y el id del artículo.
+
+SELECT sum(e.cantidad), p.nombre, e.id_articulo 
+FROM Proveedor p JOIN  Envio e  ON p.id_proveedor = e.id_proveedor
+AND e.id_articulo IN(SELECT id_articulo from Articulo)
+
+
+
+SELECT SUM(e.cantidad), p.nombre, e.id_articulo
+FROM Proveedor p JOIN Envio e ON p.id_proveedor = e.id_proveedor
+AND e.id_articulo IN (SELECT a.id_articulo FROM Articulo a)
+GROUP BY e.id_proveedor, e.id_articulo HAVING SUM(e.cantidad > 100)
+ORDER BY p.ciudad DESC
+
+ARTICULO:
+1,”articulo A”, 30, “Tandil”
+2,”articulo B”, 50, “Balcarce”
+3,”articulo C”, 10, “Olavarría”
+4,”articulo D”, 60, “Pinamar”
+
+
+PROVEEDOR:
+1, “proveedor X”, “limpieza”, “Tandil”
+2, “proveedor Y”, “higiene”, “Azul”
+3, “proveedor Z”, “farmacia”, “Bolivar”
+4, “proveedor W”, “limpieza”, “Mar del Plata”
+
+ENVIO:
+120,1,1
+160,1,2
+90,3,1
+100,4,3
+80,1,1
+
+MEzclada 
+
+ENVIO:
+cant    120
+id p 1 “proveedor X”, “limpieza”, “Tandil”
+id a 1  ”articulo A”, 30, “Tandil”
+
+cant    160,
+id p 1 “proveedor X”, “limpieza”, “Tandil”
+id a 2  ”articulo B”, 50, “Balcarce”
+
+cant    90
+id p 3 “proveedor Z”, “farmacia”, “Bolivar”
+id a 1  ”articulo A”, 30, “Tandil”
+
+cant    100
+id p 4 “proveedor W”, “limpieza”, “Mar del Plata”
+id a 1  ”articulo A”, 30, “Tandil”
+
+
+cant    80
+id p 1 “proveedor X”, “limpieza”, “Tandil”
+id a 1  ”articulo A”, 30, “Tandil”
+
+
+Salida: 
+120 proveedor x limpieza 
+
+
