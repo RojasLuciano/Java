@@ -33,7 +33,7 @@ public class LoginPage extends BasePage{
 		driver.findElement(botonINGRESAR).click();
 		return new HomePage(driver);
 	}
-	
+	 
 	public String getActualURL() {
 		return driver.getCurrentUrl();
 	}

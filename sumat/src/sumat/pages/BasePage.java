@@ -1,11 +1,13 @@
 package sumat.pages;
 
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 
-public class BasePage {
+public class BasePage { 
     public WebDriver driver;
     public WebDriverWait wait;
 
@@ -17,16 +19,22 @@ public class BasePage {
 
     //Wait Wrapper Method
     public void waitVisibility(By elementBy) {
+    	ImplicitWait();
         wait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
     }
     public void waitElement(WebElement element) {
-    	wait.until(ExpectedConditions.visibilityOf(element));
+    	ImplicitWait();
+    	wait.until(ExpectedConditions.elementToBeSelected(element));
     }
 
     //Click Method
     public void click (By elementBy) {
         waitVisibility(elementBy);
         driver.findElement(elementBy).click();
+    }
+    
+    public void ImplicitWait() {
+    	driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     }
 
     //Write Text
