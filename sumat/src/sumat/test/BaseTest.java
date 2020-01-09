@@ -33,12 +33,12 @@ public class BaseTest {
 
 	@AfterClass
 	public void tearDown() {
-		//driver.quit();		
+	driver.quit();		
 	}
 
 	@BeforeMethod
 	private void waitForLoad() {
-	    new WebDriverWait(driver, 5).until( webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+	    
 }
 	
 	private FirefoxOptions getChromeOptions() {
@@ -49,5 +49,5 @@ public class BaseTest {
 	}
 
 	
-
+ 
 }// final

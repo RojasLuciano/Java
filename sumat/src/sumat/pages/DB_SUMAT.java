@@ -37,7 +37,10 @@ public class DB_SUMAT extends BaseTest {
 		}
 	}
 
-	
+	/**
+	 * La consulta regresa un contribuyente no asociado a usuarios web
+	 * @return contribuyente TIPO, DOC, VER
+	 */
 	public Contribuyente GenerarUsuariosNoAsociados() {
 		String tdoctpodoc = null;
 		String condoc = null;
@@ -63,7 +66,9 @@ public class DB_SUMAT extends BaseTest {
 	
 	
 	
-	
+	/**
+	 * Solo para ver la salida de la query
+	 */
 	public void GenerarUsuariosNoAsociados2() {
 		String tdoctpodoc = null;
 		String condoc = null;
@@ -88,9 +93,51 @@ public class DB_SUMAT extends BaseTest {
 	}
 	
 	
+	public void habilitar_deshabilitad_impuestos() {
+		try {
+			Statement stmt = connect.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from parametrodinamico where pardincod like '%_HABILITADO%'");
+			while(rs.next()) {
+				System.out.println(rs.getString("pardincod") + rs.getString("pardindes") + rs.getString("pardinvalchr") + rs.getString("pardinvalnum"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+	}
 	
-	
-	
+	/**
+	 * (HABILITAR=1 | DESHABILITAR=0)
+	 * @param decision
+	 */
+	public void Habilitar_Deshabilitar(int decision) {
+		String opcion;
+		
+		
+		switch (decision) {
+		case 0: opcion = "UPDATE parametrodinamico SET pardinvalnum = 0 where pardincod like '%_HABILITADO%'";
+		break;
+		
+		case 1: opcion = "UPDATE parametrodinamico SET pardinvalnum = 1 where pardincod like '%_HABILITADO%'";
+		break;
+		
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + decision);
+		}
+		
+		try {
+			Statement stmt = connect.createStatement();
+			ResultSet rs = stmt.executeQuery(opcion);
+			while(rs.next()) {
+				System.out.println(rs.getString("pardincod") + rs.getString("pardindes") + rs.getString("pardinvalchr") + " |||||||||||| " + rs.getString("pardinvalnum"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+	}
 	
 	
 	

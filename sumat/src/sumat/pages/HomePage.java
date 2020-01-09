@@ -21,7 +21,7 @@ public class HomePage extends BasePage {
 	@FindBy(linkText = "Generar una Liquidación de Tasa")
 	private By generarUnaLiquidacionDeTasa;
 	private By pruebaIssue = By.name("ENTENDIDO");
-	private WebElement divInicio = driver.findElement(By.xpath("//div[@id='smoothmenu1']/ul")); 
+//	private WebElement divInicio = driver.findElement(By.xpath("//div[@id='smoothmenu1']/ul")); 
 	
 	
 	
@@ -32,17 +32,13 @@ public class HomePage extends BasePage {
 
 	}
 
-	private Select seleccionarDelMenu(String opt) {
-		// WebElement opcion = null;
-		List<WebElement> divInicio = driver.findElements(By.xpath("//div[@id='smoothmenu1']/ul/li/a"));
-		for (WebElement i : divInicio) {
-			if (i.getText().equalsIgnoreCase(opt)) {
-				moverHasta(i);
-				return new Select(i);
-			}
-		}
-		return null;
-	}
+	/*
+	 * private Select seleccionarDelMenu(String opt) { // WebElement opcion = null;
+	 * List<WebElement> divInicio =
+	 * driver.findElements(By.xpath("//div[@id='smoothmenu1']/ul/li/a")); for
+	 * (WebElement i : divInicio) { if (i.getText().equalsIgnoreCase(opt)) {
+	 * moverHasta(i); return new Select(i); } } return null; }
+	 */
 
 	private void moverHasta(WebElement we) {
 		Actions firstAction = new Actions(driver);
@@ -50,10 +46,10 @@ public class HomePage extends BasePage {
 		firstAction.moveToElement(we).perform();
 	}
 
-	public void seleccionarOpcion(String opc, String subOpcion) {
-		seleccionarDelMenu(opc).selectByVisibleText(subOpcion);
-	}
- 	
+	/*
+	 * public void seleccionarOpcion(String opc, String subOpcion) {
+	 * seleccionarDelMenu(opc).selectByVisibleText(subOpcion); }
+	 */
 /**
  * Recibe un string que equivalga a la opcion que se desea ingresar.
  * @param Opcion
@@ -62,8 +58,9 @@ public class HomePage extends BasePage {
 	public AdministracionDeContribuyentesPage administracionDeContribuyentesPage(String Opcion) {
 		try {
 			String self = "";
+		
+		waitVisibility(By.className("ddsmoothmenu"));
 		WebElement div = driver.findElement(By.className("ddsmoothmenu"));
-		//waitVisibility(By.className("ddsmoothmenu"));
 		//WebElement ul = div.findElement(By.tagName("ul"));	
 		List<WebElement> li = div.findElements(By.tagName("li"));
 			for(WebElement e: li) {
@@ -121,7 +118,7 @@ public class HomePage extends BasePage {
 						
 							break;
 						}
-						
+						 
 						
 				} 
 			 

@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="sumat.test.LoginTest">
+      <class name="sumat.test.GenerarPlanillaDeAutoliquidacionTest">
         <methods>
-          <include name="simat_menu"/>
           <include name="tearDown"/>
+          <include name="simple"/>
           <include name="setUp"/>
         </methods>
-      </class> <!-- sumat.test.LoginTest -->
+      </class> <!-- sumat.test.GenerarPlanillaDeAutoliquidacionTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
